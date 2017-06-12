@@ -1,1 +1,1 @@
-# Needs jQuery / Javascript fix for mobile menu when resizing
+# Code Challenge for Interview
