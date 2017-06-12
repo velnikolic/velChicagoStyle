@@ -18,7 +18,7 @@
         <div class="container">
             <!--Header-->
             <header id="mainHeader">
-                <div class="flexrow reverse">
+                <div class="flexrow reverse" id="section1">
                      <!--Nav-->
                     <div class="item menuWrapper">
                         <div class="mobileMenu">
@@ -29,10 +29,10 @@
              <i class="fa fa-times-circle-o fa-2x closeButton" id="closeButton" aria-hidden="true" onclick="closeNav()"></i>
         <ul>
 
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Clients</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#section1">Section 1</a></li>
+          <li><a href="#section2">Section 2</a></li>
+          <li><a href="#section3">Section 3</a></li>
+          <li><a href="#section4">Section 4</a></li>
         </ul>
         </nav>
                     </div>
@@ -41,7 +41,7 @@
                 <div class="circle item">
             <div class="circle__inner">
             <div class="circle__wrapper">
-              <div class="circle__content"><h1>Css Code Challenge</h1></div>
+              <div class="circle__content cta"><h1>Css Code Challenge</h1></div>
             </div>
           </div>
 
@@ -53,7 +53,7 @@
 	
             <div id="sections">
              <!--Section 2-->
-			<section class="down-diagonal section2">
+			<section class="down-diagonal section2" id="section2">
 			
                     <h2>Section 2</h2>
                     <div class="flexrow">
@@ -71,7 +71,7 @@
 			</section>
             
             <!--Section 3-->
-            <section class="up-diagonal section3">
+            <section class="up-diagonal section3" id="section3">
 	           <h2>Section 3</h2>
                 <div class="flexrow">
                     <p class="item">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -89,7 +89,7 @@
 			</section>
                 
             <!--Section 4-->
-            <section class="up-diagonal section4">
+            <section class="up-diagonal section4" id="section4">
 		      <h2>Section 4</h2>
                 <div class="flexrow reverse">
                     <!--Trophy-->
@@ -116,7 +116,7 @@
 			</section>
 		</div><!-- /container -->
             
-               <script>
+     <script>
                 /* Set the width of the side navigation to 250px */
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
@@ -128,7 +128,63 @@
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("closeButton").style.display = "none";
         }
+                
+         
+         if ($(window).width() < 767) {
+              $( ".nav a" ).click(function() {
+                closeNav();
+            });
+         }
+         
+        
+        
+        //Nav Fix
+        $(window).resize(function() {
+          if ($(window).width() > 767) {
+             $('.sidenav').css('width', '');
+             $( '.closeButton' ).hide();
+          }
+        
+        });
                    
+        //Smooth Scrolling
+         // Select all links with hashes
+        $('a[href*="#"]')
+          // Remove links that don't actually link to anything
+          .not('[href="#"]')
+          .not('[href="#0"]')
+          .click(function(event) {
+            // On-page links
+            if (
+              location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+              && 
+              location.hostname == this.hostname
+            ) {
+              // Figure out element to scroll to
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+              // Does a scroll target exist?
+              if (target.length) {
+                // Only prevent default if animation is actually gonna happen
+                event.preventDefault();
+                $('html, body').animate({
+                  scrollTop: target.offset().top
+                }, 1000, function() {
+                  // Callback after animation
+                  // Must change focus!
+                  var $target = $(target);
+                  $target.focus();
+                  if ($target.is(":focus")) { // Checking if the target was focused
+                    return false;
+                  } else {
+                    $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+                    $target.focus(); // Set focus again
+                  };
+                });
+              }
+            }
+          })
+
     
 
                    
